@@ -27,7 +27,7 @@ def get_member(func):
         else:
             user.language = None
         user.save()
-        activate('en')
+        activate(user.language)
         return func(update, context, user, *args, **kwargs)
 
     return wrap
