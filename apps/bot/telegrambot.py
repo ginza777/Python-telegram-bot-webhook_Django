@@ -54,13 +54,10 @@ def get_full_name_exibitor(update: Update, context: CallbackContext, tg_user: mo
     # save full name
     context.user_data['full_name'] = update.message.text
     # delete message
-    update.message.delete()
-    delete_chat(context)
     # send message
     message = update.message.reply_text(
         text=str(_("company name:")),
     )
-    delete_chat_data(context,message)
     return state.GET_COMPANY_NAME_EXIBITOR
 
 
@@ -69,8 +66,6 @@ def get_company_name(update: Update, context: CallbackContext, tg_user: models.T
     # save company name
     context.user_data['company_name'] = update.message.text
     # delete message
-    update.message.delete()
-    delete_chat(context)
     # send message
     update.message.reply_text(text=str(_("Country:")), reply_markup=get_country_button())
     return state.GET_COUNTRY_NAME_EXIBITOR
@@ -86,7 +81,6 @@ def get_country_name_exibitor(update: Update, context: CallbackContext, tg_user:
     query.delete_message()
     # get phone number
     message = context.bot.send_message(chat_id=update.effective_chat.id,text=str(_("Phone number:")), reply_markup=get_phone_number_button())
-    delete_chat_data(context,message)
     return state.GET_PHONE_NUMBER_NAME_EXIBITOR
 
 
@@ -94,12 +88,8 @@ def get_country_name_exibitor(update: Update, context: CallbackContext, tg_user:
 def get_phone_number_exibitor(update: Update, context: CallbackContext, tg_user: models.TelegramProfile):
     #save phone number
     context.user_data['phone_number'] = update.message.contact.phone_number
-    # delete message
-    update.message.delete()
-    delete_chat(context)
     #send message
     message = update.message.reply_text(text=str(_("Email:")), )
-    delete_chat_data(context,message)
     return state.GET_EMAIL_EXIBITOR
 
 
@@ -107,13 +97,7 @@ def get_phone_number_exibitor(update: Update, context: CallbackContext, tg_user:
 def get_email_exibitor(update: Update, context: CallbackContext, tg_user: models.TelegramProfile):
     # save email
     context.user_data['email'] = update.message.text
-    # delete message
-    update.message.delete()
-    delete_chat(context)
     update.message.reply_text("thanks for registration  foydali malumotlar uchun kanalimizga azo boling",reply_markup=invite_to_channel_link())
-    print(context.user_data)
-    update.message.reply_text(context.user_data)
-
 
 
 #________________________________ visitor registration___________________________________________________________________________________________________________________________
@@ -127,7 +111,6 @@ def get_user_type_visitor(update: Update, context: CallbackContext, tg_user: mod
     # save user type
     context.user_data['user_type'] = query.data
     message = query.edit_message_text(str(_("Fistname:")))
-    delete_chat_data(context, message)
     return state.GET_NAME_VISITOR
 
 
@@ -137,21 +120,15 @@ def get_user_type_visitor(update: Update, context: CallbackContext, tg_user: mod
 def get_name_visitor(update: Update, context: CallbackContext, tg_user: models.TelegramProfile):
     # save fist name
     context.user_data['name'] = update.message.text
-    # delete message
-    update.message.delete()
-    delete_chat(context)
     # send message
     message = update.message.reply_text(str(_("Lastname:")))
-    delete_chat_data(context, message)
+
     return state.GET_SURNAME_VISITOR
 
 @get_member
 def get_surname_visitor(update: Update, context: CallbackContext, tg_user: models.TelegramProfile):
     # save last name
     context.user_data['surname'] = update.message.text
-    # delete message
-    update.message.delete()
-    delete_chat(context)
     # send message
     update.message.reply_text(str(_("Country:")), reply_markup=get_country_button())
     return state.GET_COUNTRY_VISITOR
@@ -184,20 +161,15 @@ def personality_type_visitors(update: Update, context: CallbackContext, tg_user:
     query.delete_message()
     # send message
     message = context.bot.send_message(chat_id=update.effective_chat.id,text=str(_("Phone number:")), reply_markup=get_phone_number_button())
-    delete_chat_data(context,message)
     return state.GET_PHONE_NUMBER_VISITOR
 
 @get_member
 def get_phone_number_visitor(update: Update, context: CallbackContext, tg_user: models.TelegramProfile):
     # save phone number
     context.user_data['phone_number'] = update.message.contact.phone_number
-
     # delete message
-    update.message.delete()
-    delete_chat(context)
     #send message
     message = update.message.reply_text(text=str(_("Email:")), )
-    delete_chat_data(context,message)
     return state.GET_EMAIL_VISITOR
 
 
@@ -205,12 +177,7 @@ def get_phone_number_visitor(update: Update, context: CallbackContext, tg_user: 
 def get_email_visitor(update: Update, context: CallbackContext, tg_user: models.TelegramProfile):
     # save email
     context.user_data['email'] = update.message.text
-
-    # delete message
-    update.message.delete()
-    delete_chat(context)
-
     update.message.reply_text("thanks for registration  foydali malumotlar uchun kanalimizga azo boling",
                               reply_markup=invite_to_channel_link())
     print(context.user_data)
-    update.message.reply_text(context.user_data)
+

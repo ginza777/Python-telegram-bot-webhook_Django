@@ -23,7 +23,6 @@ def get_position_button():
     return InlineKeyboardMarkup(buttons)
 
 
-
 def get_country_button():
     countrys = Country.objects.all()
     print(countrys)
