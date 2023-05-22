@@ -88,7 +88,9 @@ def setup(token):
 
     }
     entry_points = [CommandHandler('start', start), ]
-    fallbacks = [CommandHandler('start', start)]
+    fallbacks = [
+                 MessageHandler(Filters.all, start),
+                 ]
     conversation_handler = ConversationHandler(
         entry_points=entry_points,
         states=states,

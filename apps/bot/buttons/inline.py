@@ -1,6 +1,6 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from django.utils.translation import gettext_lazy as _
-from apps.bot.models import Country, Region
+from apps.common.models import Country, Region
 from core.settings.base import LANGUAGES
 def get_language_button():
     buttons = [

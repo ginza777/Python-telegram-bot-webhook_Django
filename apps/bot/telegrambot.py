@@ -5,7 +5,6 @@ from telegram.ext import CallbackContext
 from django.utils.translation import gettext_lazy as _, activate
 from apps.bot import models
 from utils.decarators import get_member
-from .buttons.function import delete_chat, delete_chat_data
 from .buttons.inline import *
 from .buttons.keyboard import get_phone_number_button
 from .state import state
@@ -77,7 +76,8 @@ def get_phone_number_exibitor(update: Update, context: CallbackContext, tg_user:
 def get_email_exibitor(update: Update, context: CallbackContext, tg_user: models.TelegramProfile):
     context.user_data['email'] = update.message.text
     update.message.reply_text(str(_("thanks for registration")), reply_markup=invite_to_channel_link())
-
+    context.bot.send_message(str(_("who are you?")), reply_markup=get_position_button())
+    return state.GET_USER_TYPE
 
 # ________________________________ visitor registration___________________________________________________________________________________________________________________________
 
@@ -142,4 +142,6 @@ def get_email_visitor(update: Update, context: CallbackContext, tg_user: models.
     context.user_data['email'] = update.message.text
     update.message.reply_text(str(_("thanks for registration")),
                               reply_markup=invite_to_channel_link())
-    print(context.user_data)
+    context.bot.send_message(
+        chat_id=update.effective_chat.id, text=str(_("who are you?")), reply_markup=get_position_button())
+    return state.GET_USER_TYPE

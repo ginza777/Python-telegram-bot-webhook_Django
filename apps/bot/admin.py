@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TelegramProfile,Country,Region
+from .models import TelegramProfile
 
 
 # Register your models here.
@@ -7,10 +7,3 @@ from .models import TelegramProfile,Country,Region
 class TelegramProfileAdmin(admin.ModelAdmin):
     list_display = ['first_name','last_name','username','telegram_id']
 
-@admin.register(Country)
-class CountryAdmin(admin.ModelAdmin):
-    list_display = ['name']
-
-@admin.register(Region)
-class RegionAdmin(admin.ModelAdmin):
-    list_display = ['name','country']

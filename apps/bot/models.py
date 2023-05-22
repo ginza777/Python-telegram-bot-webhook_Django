@@ -19,14 +19,3 @@ class TelegramProfile(models.Model):
 
 
 
-class Country(models.Model):
-    name=models.CharField(max_length=200,null=True)
-
-    def __str__(self):
-        return self.name
-class Region(models.Model):
-    name=models.CharField(max_length=200,null=True)
-    country=models.ForeignKey(Country,on_delete=models.CASCADE,null=True)
-
-    def __str__(self):
-        return f"{self.name}        {self.country.name}"
