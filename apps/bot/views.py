@@ -29,60 +29,59 @@ def setup(token):
     states = {
         # you can add more states here
         state.GET_LANGUAGE: [
-            CommandHandler('start', start),
             CallbackQueryHandler(get_language, pattern='uz|ru|en'),
         ],
-        state.GET_USER_TYPE: [CommandHandler('start', start),
-                              CallbackQueryHandler(get_user_type_exibitor, pattern=('exibitor')),
-                              CallbackQueryHandler(get_user_type_visitor, pattern=('visitor')),
-                              ],
-        state.GET_FULL_NAME_EXIBITOR: [CommandHandler('start', start),
-                                       MessageHandler(Filters.text, get_full_name_exibitor),
-                                       ],
-        state.GET_COMPANY_NAME_EXIBITOR: [CommandHandler('start', start),
-                                          MessageHandler(Filters.text, get_company_name)
-                                          ],
+        state.GET_USER_TYPE: [
+            CallbackQueryHandler(get_user_type_exibitor, pattern=('exibitor')),
+            CallbackQueryHandler(get_user_type_visitor, pattern=('visitor')),
+        ],
+        state.GET_FULL_NAME_EXIBITOR: [
+            MessageHandler(Filters.text, get_full_name_exibitor),
+        ],
+        state.GET_COMPANY_NAME_EXIBITOR: [
+            MessageHandler(Filters.text, get_company_name)
+        ],
 
-        state.GET_COUNTRY_NAME_EXIBITOR: [CommandHandler('start', start),
-                                          CallbackQueryHandler(get_country_name_exibitor)
-                                          ],
-        state.GET_PHONE_NUMBER_NAME_EXIBITOR: [CommandHandler('start', start),
-                                               MessageHandler(Filters.all, get_phone_number_exibitor)
+        state.GET_COUNTRY_NAME_EXIBITOR: [
+            CallbackQueryHandler(get_country_name_exibitor)
+        ],
+        state.GET_PHONE_NUMBER_NAME_EXIBITOR: [
+            MessageHandler(Filters.all, get_phone_number_exibitor)
 
-                                               ],
-        state.GET_EMAIL_EXIBITOR: [CommandHandler('start', start),
-                                   MessageHandler(Filters.text, get_email_exibitor)
-                                   ],
+        ],
+        state.GET_EMAIL_EXIBITOR: [
+            MessageHandler(Filters.text, get_email_exibitor)
+        ],
 
         # VISITORS
         state.GET_NAME_VISITOR: [
-            CommandHandler('start', start),
+
             MessageHandler(Filters.text, get_name_visitor)
         ],
         state.GET_SURNAME_VISITOR: [
-            CommandHandler('start', start),
+
             MessageHandler(Filters.text, get_surname_visitor)
         ],
         state.GET_COUNTRY_VISITOR: [
-            CommandHandler('start', start),
+
             CallbackQueryHandler(get_country_name_visitor)
 
         ],
-        state.GET_REGION_VISITOR:[
-            CommandHandler('start', start),
+        state.GET_REGION_VISITOR: [
+
             CallbackQueryHandler(get_region_name_visitor)
         ],
         state.PERSONALITY_TYPE_VISITOR: [
-            CommandHandler('start', start),
+
             CallbackQueryHandler(personality_type_visitors)
         ],
         state.GET_PHONE_NUMBER_VISITOR: [
-            CommandHandler('start', start),
-            MessageHandler(Filters.all,get_phone_number_visitor)
+
+            MessageHandler(Filters.all, get_phone_number_visitor)
 
         ],
-        state.GET_EMAIL_VISITOR:[
-            CommandHandler('start', start),
+        state.GET_EMAIL_VISITOR: [
+
             MessageHandler(Filters.text, get_email_visitor)
 
         ]
